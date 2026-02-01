@@ -23,3 +23,9 @@ function Utils.AddTargetToEntity(entity, options)
 		distance = 2.0,
 	})
 end
+
+---@param entity number
+---@param label string
+function Utils.RemoveTargetFromEntity(entity, label)
+	exports["qb-target"]:RemoveTargetEntity(entity, label)
+end

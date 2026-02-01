@@ -1,6 +1,14 @@
 local currentLocationId = GlobalState.blackMarketLocationId
 local blackMarketPed
 
+local function deletePed()
+	if blackMarketPed and DoesEntityExist(blackMarketPed) then
+		Utils.RemoveTargetFromEntity(blackMarketPed, Config.BlackMarket.interactText)
+		DeleteEntity(blackMarketPed)
+	end
+	blackMarketPed = nil
+end
+
 AddStateBagChangeHandler("blackMarketLocationId", nil, function(bagName, key, value)
 	currentLocationId = value
 end)
@@ -9,10 +17,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1000)
 		if not currentLocationId then
-			if blackMarketPed and DoesEntityExist(blackMarketPed) then
-				DeleteEntity(blackMarketPed)
-			end
-			blackMarketPed = nil
+			deletePed()
 			goto skip
 		end
 
@@ -56,10 +61,7 @@ Citizen.CreateThread(function()
 				})
 			end
 		else
-			if blackMarketPed and DoesEntityExist(blackMarketPed) then
-				DeleteEntity(blackMarketPed)
-			end
-			blackMarketPed = nil
+			deletePed()
 		end
 
 		::skip::
@@ -70,9 +72,5 @@ AddEventHandler("onResourceStop", function(resource)
 	if resource ~= GetCurrentResourceName() then
 		return
 	end
-
-	if blackMarketPed and DoesEntityExist(blackMarketPed) then
-		DeleteEntity(blackMarketPed)
-	end
-	blackMarketPed = nil
+	deletePed()
 end)
