@@ -56,7 +56,7 @@ Citizen.CreateThread(function()
 				Utils.AddTargetToEntity(blackMarketPed, {
 					label = Config.BlackMarket.interactText,
 					action = function()
-						print("Test")
+						TriggerServerEvent("axeBlackMarket:server:openBlackMarket")
 					end,
 				})
 			end

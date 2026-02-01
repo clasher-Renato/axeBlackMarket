@@ -1,6 +1,28 @@
+GlobalState.blackMarketLocationId = nil
 local TIME_TO_CHANGE_LOCATION_IN_MINUTES = Config.BlackMarket.timeToChangeLocationInMinutes * 1000 * 60
 local DURATION_IN_MINUTES = Config.BlackMarket.durationInMinutes * 1000 * 60
 local currentLocationId
+local blackMarketShopId = "blackmarket_shop"
+
+local function registeBlackMarketShop()
+	local items = {}
+
+	for _, item in ipairs(Config.BlackMarketItems) do
+		local amount = math.random(item.amount.min, item.amount.max)
+		items[#items + 1] = {
+			name = item.name,
+			price = item.price,
+			amount = amount,
+		}
+	end
+
+	exports["qb-inventory"]:CreateShop({
+		name = blackMarketShopId,
+		label = "BlackMarket",
+		slots = #items,
+		items = items,
+	})
+end
 
 ---@param noLocation? boolean
 local function setBlackMarketLocation(noLocation)
@@ -19,13 +41,25 @@ local function updateBlackMarket()
 	Citizen.Wait(DURATION_IN_MINUTES)
 	setBlackMarketLocation(true)
 	SetTimeout(TIME_TO_CHANGE_LOCATION_IN_MINUTES, function()
+		registeBlackMarketShop()
 		updateBlackMarket()
 	end)
 end
 
 local function startBlackMarket()
+	registeBlackMarketShop()
 	Citizen.Wait(TIME_TO_CHANGE_LOCATION_IN_MINUTES)
 	updateBlackMarket()
 end
+
+RegisterNetEvent("axeBlackMarket:server:openBlackMarket", function()
+	local src = source
+
+	if not currentLocationId then
+		return
+	end
+
+	exports["qb-inventory"]:OpenShop(src, blackMarketShopId)
+end)
 
 startBlackMarket()
