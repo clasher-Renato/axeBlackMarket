@@ -18,7 +18,7 @@ local function registeBlackMarketShop()
 
 	exports["qb-inventory"]:CreateShop({
 		name = blackMarketShopId,
-		label = "BlackMarket",
+		label = Config.BlackMarket.shopTitle,
 		slots = #items,
 		items = items,
 	})

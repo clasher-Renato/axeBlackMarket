@@ -1,3 +1,5 @@
+local QBCore = exports["qb-core"]:GetCoreObject({ "Functions" })
+
 local currentLocationId = GlobalState.blackMarketLocationId
 local blackMarketPed
 
@@ -11,13 +13,26 @@ end
 
 AddStateBagChangeHandler("blackMarketLocationId", nil, function(bagName, key, value)
 	currentLocationId = value
+
+	if currentLocationId == nil then
+		deletePed()
+		QBCore.Functions.Notify({ text = Config.BlackMarket.textWhenBlackMerchantLeft, caption = "BlackMarket" })
+		return
+	end
+
+	local location = Config.Locations[currentLocationId]
+
+	if not location then
+		return
+	end
+
+	QBCore.Functions.Notify({ text = location.tip, caption = "BlackMarket" })
 end)
 
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1000)
 		if not currentLocationId then
-			deletePed()
 			goto skip
 		end
 
