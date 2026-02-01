@@ -10,6 +10,7 @@ shared_scripts({
 })
 
 client_scripts({
+	"client/cl-utils.lua",
 	"client/cl-main.lua",
 })
 
