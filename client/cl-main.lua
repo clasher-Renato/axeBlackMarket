@@ -3,13 +3,11 @@ local blackMarketPed
 
 AddStateBagChangeHandler("blackMarketLocationId", nil, function(bagName, key, value)
 	currentLocationId = value
-	print(value)
 end)
 
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1000)
-
 		if not currentLocationId then
 			if blackMarketPed and DoesEntityExist(blackMarketPed) then
 				DeleteEntity(blackMarketPed)
@@ -49,6 +47,13 @@ Citizen.CreateThread(function()
 				FreezeEntityPosition(blackMarketPed, true)
 				SetEntityHeading(blackMarketPed, location.coords.w)
 				SetEntityAsMissionEntity(blackMarketPed, true, true)
+
+				Utils.AddTargetToEntity(blackMarketPed, {
+					label = Config.BlackMarket.interactText,
+					action = function()
+						print("Test")
+					end,
+				})
 			end
 		else
 			if blackMarketPed and DoesEntityExist(blackMarketPed) then

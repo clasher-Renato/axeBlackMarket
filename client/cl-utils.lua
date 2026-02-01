@@ -7,3 +7,19 @@ function Utils.LoadModel(model)
 		Citizen.Wait(0)
 	end
 end
+
+---@param entity number
+---@param options { label: string, action: function }
+function Utils.AddTargetToEntity(entity, options)
+	exports["qb-target"]:AddTargetEntity(entity, {
+		options = {
+			{
+				label = options.label,
+				action = function()
+					options.action()
+				end,
+			},
+		},
+		distance = 2.0,
+	})
+end
