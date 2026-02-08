@@ -1,4 +1,4 @@
-local QBCore = exports["qb-core"]:GetCoreObject({ "Functions", "" })
+local QBCore = exports["qb-core"]:GetCoreObject({ "Functions" })
 
 local currentLocationId = GlobalState.blackMarketLocationId
 local blackMarketPed
