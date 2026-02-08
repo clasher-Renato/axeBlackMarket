@@ -15,6 +15,7 @@ A dynamic Black Market script for FiveM that features a moving merchant. The bla
 - **QBCore** — Framework
 - **qb-inventory** — Inventory & shop system
 - **qb-target** — Interaction
+- **Polyzone** — Zone control to handle blackmarket ped
 
 Ensure these resources are started **before** axeBlackMarket in your `server.cfg`.
 
