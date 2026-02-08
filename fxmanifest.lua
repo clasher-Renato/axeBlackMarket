@@ -10,6 +10,8 @@ shared_scripts({
 })
 
 client_scripts({
+	"@PolyZone/client.lua",
+	"@PolyZone/CircleZone.lua",
 	"client/cl-utils.lua",
 	"client/cl-main.lua",
 })

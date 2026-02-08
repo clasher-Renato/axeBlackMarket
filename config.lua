@@ -5,7 +5,7 @@ Config.BlackMarket = {
 	ped = `g_m_importexport_01`,
 	interactText = "Open BlackMarket",
 	durationInMinutes = 10, -- How long the black market is open for after changing the location
-	timeToChangeLocationInMinutes = 5, -- How long to wait before changing the location
+	timeToChangeLocationInMinutes = 0.1, -- How long to wait before changing the location
 	textWhenBlackMerchantLeft = "The black market is closed, come back later.",
 }
 

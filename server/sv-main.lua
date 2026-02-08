@@ -61,7 +61,11 @@ RegisterNetEvent("axeBlackMarket:server:openBlackMarket", function()
 
 	local playerPed = GetPlayerPed(src)
 	local playerCoords = GetEntityCoords(playerPed)
-	local distance = #(playerCoords - Config.Locations[currentLocationId].coords)
+	local locationCoords = Config.Locations[currentLocationId].coords
+	local distance = #(
+		vec3(playerCoords.x, playerCoords.y, playerCoords.z)
+		- vec3(locationCoords.x, locationCoords.y, locationCoords.z)
+	)
 	if distance > 10.0 then
 		return
 	end
