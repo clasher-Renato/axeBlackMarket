@@ -59,6 +59,13 @@ RegisterNetEvent("axeBlackMarket:server:openBlackMarket", function()
 		return
 	end
 
+	local playerPed = GetPlayerPed(src)
+	local playerCoords = GetEntityCoords(playerPed)
+	local distance = #(playerCoords - Config.Locations[currentLocationId].coords)
+	if distance > 10.0 then
+		return
+	end
+
 	exports["qb-inventory"]:OpenShop(src, blackMarketShopId)
 end)
 
