@@ -1,4 +1,4 @@
-local QBCore = exports["qb-core"]:GetCoreObject({ "Functions" })
+local QBCore = exports["qb-core"]:GetCoreObject({ "Functions", "" })
 
 local currentLocationId = GlobalState.blackMarketLocationId
 local blackMarketPed
@@ -81,7 +81,13 @@ AddStateBagChangeHandler("blackMarketLocationId", nil, function(bagName, key, va
 		return
 	end
 
-	QBCore.Functions.Notify({ text = location.tip, caption = "BlackMarket" })
+	local playerData = QBCore.Functions.GetPlayerData()
+	if playerData.job then
+		if Config.Notifications.Jobs[playerData.job.name] or Config.Notifications.Gangs[playerData.gang.name] then
+			QBCore.Functions.Notify({ text = location.tip, caption = "BlackMarket" })
+		end
+	end
+
 	createBlackMarketZone()
 end)
 

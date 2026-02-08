@@ -38,3 +38,13 @@ Config.BlackMarketItems = {
 		},
 	},
 }
+
+Config.Notifications = { -- Notifications sent to players when the black market is open
+	Jobs = {
+		["unemployed"] = true,
+	},
+	Gangs = {
+		["ballas"] = true,
+		["families"] = true,
+	},
+}
