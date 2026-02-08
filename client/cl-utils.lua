@@ -2,9 +2,26 @@ Utils = {}
 
 ---@param model string|number
 function Utils.LoadModel(model)
+	if not model then
+		print("INVALID PED MODEL WHEN LOADING PED")
+		return
+	end
+
+	if not IsModelValid(model) then
+		print("INVALID PED MODEL WHEN LOADING PED")
+		return
+	end
+
+	local timeout = 10000
+	local currentTime = 0
 	RequestModel(model)
 	while not HasModelLoaded(model) do
-		Citizen.Wait(0)
+		Citizen.Wait(100)
+		currentTime = currentTime + 100
+		if currentTime > timeout then
+			print("TIMEOUT WHEN LOADING PED")
+			return
+		end
 	end
 end
 
