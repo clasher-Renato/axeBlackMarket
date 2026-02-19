@@ -2,6 +2,10 @@
 
 A dynamic Black Market script for FiveM that features a moving merchant. The black market NPC appears at random locations, stays open for a limited time, then disappears and reopens somewhere else—keeping players on their toes.
 
+## Preview
+
+[Preview here](https://youtu.be/RygzgH3rxBA)
+
 ## Installation
 
 **Plug & Play** — Simply add the resource to your server and start it. No database setup or extra configuration required beyond editing `config.lua` to suit your server.
